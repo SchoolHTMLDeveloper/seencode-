@@ -1,32 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>powerschool</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Language DeCoder</h1>
-  <textarea id="input" placeholder="Type encoded text here..."></textarea>
-<textarea id="output" readonly placeholder="Decoded Text..."></textarea>
-  
-  <script src="script.js"></script>
-  
-      <button onclick="decodeText()">Decode text</button>
-    <button onclick="copyOutput()">Copy Output</button>
+<meta charset="UTF-8">
+<title>Language Decoder</title>
+<style>
+  body {
+    background: radial-gradient(circle at top, #2a003a, #0d0d0d);
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e6d6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-  <button onclick="location.href='credits.html'">Credits</button>
-  
-    <script>
-function copyOutput() {
-  const output = document.getElementById("output");
-  navigator.clipboard.writeText(output.value).then(() => {
-    console.log("Copied to clipboard!");
-  }).catch(err => {
-    console.error("Copy failed:", err);
-  });
+  .card {
+    width: 90%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.09);
+    padding: 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(160, 90, 255, 0.35);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 34px;
+    color: #d8b2ff;
+  }
+
+  textarea {
+    width: 100%;
+    height: 140px;
+    background: #1f1f1f; /* FIXED: fully visible background */
+    border: 2px solid #a464ff;
+    border-radius: 10px;
+    padding: 12px;
+    color: #ffffff;        /* FIXED: visible text */
+    font-size: 16px;
+    resize: none;
+    margin-top: 15px;
+    outline: none;
+  }
+
+  .btn {
+    background: #9c59ff;
+    border: none;
+    padding: 13px 26px;
+    margin: 10px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: #b678ff;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h1>Language Decoder</h1>
+
+  <textarea id="input" placeholder="Paste encoded text here..."></textarea>
+  <textarea id="output" readonly placeholder="Decoded text will appear here..."></textarea>
+
+  <button class="btn" onclick="decodeText()">Decode</button>
+  <button class="btn" onclick="copyOutput()">Copy Output</button>
+  <button class="btn" onclick="location.href='enc.html'">Go to Encoder</button>
+</div>
+
+<script>
+const decoder = {
+  "/xar":" ", "/bja":"a", "/nop":"b", "/nga":"c", "/foz":"d",
+  "/req":"e", "/bel":"f", "/sor":"g", "/nau":"h", "/xox":"i",
+  "/vaf":"j", "/otv":"k", "/bvh":"l", "/cha":"m", "/tom":"n",
+  "/ola":"o", "/xdf":"p", "/kkx":"q", "/xxk":"r", "/aab":"s",
+  "/ccb":"t", "/oop":"u", "/nna":"v", "/hra":"w", "/jer":"x",
+  "/rey":"y", "/zip":"z"
+};
+
+function decodeText() {
+  const input = document.getElementById("input").value.toLowerCase();
+  let output = "";
+  let i = 0;
+
+  while (i < input.length) {
+    if (input[i] === "/") {
+      const token = input.slice(i, i+4);
+      output += decoder[token] || token;
+      i += 4;
+    } else {
+      output += input[i];
+      i++;
+    }
+  }
+
+  document.getElementById("output").value = output;
 }
 
+function copyOutput() {
+  navigator.clipboard.writeText(document.getElementById("output").value);
+}
 </script>
+
 </body>
 </html>
