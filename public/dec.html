@@ -2,78 +2,83 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Language Decoder</title>
+<title>Decoder</title>
+<link rel="stylesheet" href="style.css">
+
 <style>
-  body {
-    background: radial-gradient(circle at top, #2a003a, #0d0d0d);
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: #e6d6ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+/* FORCE VISIBILITY (overrides all your old styles) */
+textarea {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: rgba(0, 0, 0, 0.35) !important;
+  border: 2px solid #a55bff !important;
+  color: #ffffff !important;
+  width: 100% !important;
+  height: 160px !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  resize: none !important;
+  margin-top: 12px !important;
+  backdrop-filter: blur(4px) !important;
+}
 
-  .card {
-    width: 90%;
-    max-width: 650px;
-    background: rgba(255, 255, 255, 0.09);
-    padding: 30px;
-    border-radius: 16px;
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(160, 90, 255, 0.35);
-    text-align: center;
-  }
+/* container */
+.card {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  border: 1px solid #a464ff;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
 
-  h1 {
-    font-size: 34px;
-    color: #d8b2ff;
-  }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #120020, #000000);
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
 
-  textarea {
-    width: 100%;
-    height: 140px;
-    background: #1f1f1f; /* FIXED: fully visible background */
-    border: 2px solid #a464ff;
-    border-radius: 10px;
-    padding: 12px;
-    color: #ffffff;        /* FIXED: visible text */
-    font-size: 16px;
-    resize: none;
-    margin-top: 15px;
-    outline: none;
-  }
+h1 {
+  color: #d7b2ff;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
 
-  .btn {
-    background: #9c59ff;
-    border: none;
-    padding: 13px 26px;
-    margin: 10px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-    transition: 0.2s;
-  }
+button {
+  background: #9c59ff;
+  border: none;
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-  .btn:hover {
-    background: #b678ff;
-    transform: scale(1.05);
-  }
+button:hover {
+  background: #b678ff;
+  transform: scale(1.05);
+}
 </style>
 </head>
 
 <body>
 <div class="card">
-  <h1>Language Decoder</h1>
+  <h1>Decoder</h1>
 
   <textarea id="input" placeholder="Paste encoded text here..."></textarea>
-  <textarea id="output" readonly placeholder="Decoded text will appear here..."></textarea>
+  <textarea id="output" readonly placeholder="Decoded text shows here..."></textarea>
 
-  <button class="btn" onclick="decodeText()">Decode</button>
-  <button class="btn" onclick="copyOutput()">Copy Output</button>
-  <button class="btn" onclick="location.href='enc.html'">Go to Encoder</button>
+  <button onclick="decodeText()">Decode</button>
+  <button onclick="copyOutput()">Copy Output</button>
+  <button onclick="location.href='enc.html'">Go to Encoder</button>
 </div>
 
 <script>
@@ -93,8 +98,8 @@ function decodeText() {
 
   while (i < input.length) {
     if (input[i] === "/") {
-      const token = input.slice(i, i+4);
-      output += decoder[token] || token;
+      const key = input.slice(i, i+4);
+      output += decoder[key] || key;
       i += 4;
     } else {
       output += input[i];
