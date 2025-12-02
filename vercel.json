@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/enc.html" },
+    { "source": "/decode", "destination": "/dec.html" }
+  ]
+}
