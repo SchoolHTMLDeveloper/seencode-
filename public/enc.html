@@ -1,37 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>powerschool</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Language encoder</h1>
-  <h2>input:</h2>
-  <textarea id="input" placeholder="Type text here..."></textarea>
-  
-<textarea id="output" readonly placeholder="encoded text here..."></textarea>
+<meta charset="UTF-8">
+<title>Language Encoder</title>
+<style>
+  body {
+    background: radial-gradient(circle at top, #2a003a, #0d0d0d);
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #e6d6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-    <button onclick="decodeText()">encode text</button>
-  <button onclick="copyOutput()">Copy Output</button>
-
-
-  <button onclick="location.href='credits.html'">Credits</button>
-
-  
-  <script src="enc.js"></script>
-  
-  <script>
-function copyOutput() {
-  const output = document.getElementById("output");
-  navigator.clipboard.writeText(output.value).then(() => {
-    console.log("Copied to clipboard!");
-  }).catch(err => {
-    console.error("Copy failed:", err);
-  });
-}
-
-</script>
-
-</body>
-</html>
+  .card {
+    width: 90%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 30px;
+    border-radius: 16px;
+    backdro
